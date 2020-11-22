@@ -1,37 +1,60 @@
+import { Assets } from '@react-navigation/stack';
 import React from 'react';
 import {
   View,
   Text,
   Image,
   FlatList,
+  TouchableOpacity,
 }from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { color } from 'react-native-reanimated';
 import styled from 'styled-components';
 import { COLORS, FONTS, icons, images, SIZES } from '../constants';
+
+import TodaysShare from '../components/TodaysShare';
+import AddedFriends from '../components/AddedFriends';
 
 const Container = styled.View`
   flex: 1;
 `;
-const Label = styled.View`
+const ContainerNewPlants = styled.View`
+  height: 30%;
+  background: ${COLORS.white};
+`;
+const ContainerGreen = styled.View`
+  flex: 1;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background: ${COLORS.primary};
+`;
+const TitleWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+const GreenLabel = styled.View`
   position: absolute;
   bottom: 17%;
   right: 0;
   background: ${COLORS.primary};
-  padding-left: ${SIZES.base}px;
-  padding-right: ${SIZES.base}px;
+  padding-left: ${SIZES.base*2}px;
+  padding-right: ${SIZES.base/1.5}px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 `;
-const HeartContainer = styled.TouchableOpacity`
+const HeartWrapper = styled.TouchableOpacity`
   position: absolute;
   top: 15%;
-  left: 7;
+  left: 7px;
+`;
+const PlantsListWrapper = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin-right: ${SIZES.base*2}px;
 `;
 
 
+
 const Home = () => {
-  
   // Dummy Data
   const [newPlants, setNewPlants] = React.useState([
     {
@@ -63,7 +86,7 @@ const Home = () => {
   // Render Module
   function renderNewPlatns(item, index) {
     return(
-      <View style={{ alignItems: 'center', justifyContent: 'center', marginHorizontal: SIZES.base}}>
+      <PlantsListWrapper>
         <Image 
           source={item.img}
           resizeMode='cover'
@@ -74,11 +97,11 @@ const Home = () => {
           }}
         />
         
-        <Label>
+        <GreenLabel>
           <Text style={{color: COLORS.white, ...FONTS.body4}}>{item.name}</Text>
-        </Label>
+        </GreenLabel>
 
-        <HeartContainer onPress={()=>{}}>
+        <HeartWrapper onPress={()=>{}}>
           <Image 
             source={item.favorite ? icons.heartRed : icons.heartGreenOutline}
             resizeMode='contain'
@@ -87,36 +110,25 @@ const Home = () => {
               height: 20,
             }}
           />
-        </HeartContainer>
-      </View>
+        </HeartWrapper>
+      </PlantsListWrapper>
     )
   }
   
   return(
     <Container>
-      {/* New Plants */}
-      <View style={{height: '30%', backgroundColor: COLORS.white}}>
-        <View style={{
-          flex:1,
-          borderBottomLeftRadius: 50,
-          borderBottomRightRadius: 50,
-          backgroundColor: COLORS.primary
-        }}
-        >
+      {/* Start of New Plants */}
+      <ContainerNewPlants>
+        <ContainerGreen>
           <View style={{
-            marginTop: SIZES.padding/2,
+            marginTop: SIZES.font,
             marginHorizontal: SIZES.padding
           }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'}}>
-              <Text style={{
-                color: COLORS.white,
-                ...FONTS.h2
-              }}>
+            <TitleWrapper>
+              <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
                 New Plants
               </Text>
-              <TouchableOpacity
-                onPress={()=>{}}
-              >
+              <TouchableOpacity onPress={()=>{}}>              
                 <Image 
                   source={icons.focus}  
                   resizeMode='contain'
@@ -126,10 +138,10 @@ const Home = () => {
                   }}
                 />
               </TouchableOpacity>
-            </View>
+            </TitleWrapper>
 
-            {/* Dummy Data, Module 이용 */}
-            <View style={{ marginTop: SIZES.base }}>
+            {/* Dummy Data & Module 이용한 플랫리스트 */}
+            
               <FlatList 
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -137,18 +149,16 @@ const Home = () => {
                 keyExtractor={item => item.id.toString()}
                 renderItem={({item, index}) => renderNewPlatns(item, index)}
               />
-            </View>
+            
           </View>
-        </View>
-      </View>
+        </ContainerGreen>
+      </ContainerNewPlants>
+      {/* End of New Plants */}
 
+      <TodaysShare/>
 
-
-
-      {/* Today's Share */}
-      <View style={{height: '50%', backgroundColor: COLORS.lightGray}}></View>
-      {/* Added Friend */}
-      <View style={{height: '20%', backgroundColor: COLORS.lightGray}}></View>
+      <AddedFriends/>
+      
     </Container>
   )
 }
