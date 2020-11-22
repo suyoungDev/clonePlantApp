@@ -1,19 +1,32 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
-  FlatList,
   TouchableOpacity,
 }from 'react-native';
-
-import { COLORS, FONTS, icons, images, SIZES } from '../constants';
-
+import { COLORS, FONTS, images, SIZES } from '../constants';
 import styled from 'styled-components';
 
 const Container = styled.View`
-  flex: 1;
+  flex:1;
   background-color: ${COLORS.lightGray};
+`;
+const ShareWrapper = styled.View`
+  flex:1;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: ${COLORS.white};
+`;
+const TitleWrapper = styled.View`
+  flex: 1;
+  margin-top: ${SIZES.font}px;
+  margin-left: ${SIZES.padding}px;
+  margin-right: ${SIZES.padding}px;
+`;
+const TitleItemWrapper = styled.View`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 `;
 const Title = styled.Text`
   color: ${COLORS.secondary};
@@ -21,19 +34,8 @@ const Title = styled.Text`
 const SeeAll = styled.Text`
   color: ${COLORS.secondary};
 `;
-const ShareWrapper = styled.View`
-  flex: 1;
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
-  background-color: ${COLORS.white};
-`;
-const TitleWrapper = styled.View`
-  margin-top: ${SIZES.font}px;
-  margin-left: ${SIZES.padding}px;
-  margin-right: ${SIZES.padding}px;
-`;
 const SharePicWrapper = styled.View`
-  flex: 1;
+  height: 82%;
   flex-direction: row;
   margin-top: ${SIZES.base}px;
 `;
@@ -50,22 +52,22 @@ const ImagePicker = styled.TouchableOpacity`
 export default function todaysShare(){
   return(
       
-      <Container style={{height: '50%', backgroundColor: COLORS.lightGray}}>
-        <ShareWrapper>
-          <TitleWrapper>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'}}>
-              <Title style={{...FONTS.h2}}>Today's Share</Title>
-              <TouchableOpacity onPress={()=>{}}>
-                <SeeAll style={{...FONTS.body3}}>See All</SeeAll>
-              </TouchableOpacity>
-            </View>
-          </TitleWrapper>
-
+    <Container>
+      <ShareWrapper>
+        <TitleWrapper>
+       
+          <TitleItemWrapper>
+            <Title style={{...FONTS.h2}}>Today's Share</Title>
+            <TouchableOpacity onPress={()=>{}}>
+              <SeeAll style={{...FONTS.body3}}>See All</SeeAll>
+            </TouchableOpacity>
+          </TitleItemWrapper>
+      
 
           {/* Today's Share pictures */}
           <SharePicWrapper>
             {/* left main pic */}
-            <ShareLeftPicWrapper style={{backgroundColor: 'yellow'}}>
+            <ShareLeftPicWrapper>
               <ImagePicker onPress={()=>{}}>
                 <Image 
                   source={images.plant5}
@@ -90,9 +92,8 @@ export default function todaysShare(){
               </ImagePicker>
             </ShareLeftPicWrapper>
 
-            
             {/* right main pic */}
-            <ShareRightPicWrapper style={{backgroundColor:'pink'}}>
+            <ShareRightPicWrapper>
               <ImagePicker style={{marginLeft: SIZES.font}} onPress={()=>{}}>
                 <Image 
                   source={images.plant7}
@@ -105,9 +106,9 @@ export default function todaysShare(){
                 />
               </ImagePicker>
             </ShareRightPicWrapper>
-          </SharePicWrapper>
-        </ShareWrapper>
-      </Container>
-      
+          </SharePicWrapper> 
+        </TitleWrapper>
+      </ShareWrapper>
+    </Container>
   )
 }
