@@ -272,7 +272,7 @@ const PlantDetail = ({navigation}) => {
     return(
       <View style={{
         position: 'absolute',
-        top: 50,
+        top: 20,
         left: SIZES.padding,
         right: SIZES.padding,
       }}>
@@ -285,7 +285,7 @@ const PlantDetail = ({navigation}) => {
                 borderRadius: 20,
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'rgba(255,255,255,0.5)'
+                backgroundColor: 'rgba(255,255,255,0.2)'
               }}
               onPress={() => {navigation.goBack()}}
             >
@@ -318,6 +318,24 @@ const PlantDetail = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
+
+      {/* Title */}
+        <View style={{flexDirection: 'row', marginTop: '8%'}}>
+          <View style={{
+            flex: 1
+           }}>
+            <Text style={{
+              ...FONTS.largeTitle,
+              color: COLORS.white
+            }}>Glory Montas</Text>
+          </View>
+          <View style={{
+            flex: 1
+          }}>
+            
+          </View>
+        </View>
+
       </View>
     )
   }
