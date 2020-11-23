@@ -1,4 +1,3 @@
-import { Assets } from '@react-navigation/stack';
 import React from 'react';
 import {
   View,
@@ -7,11 +6,13 @@ import {
   FlatList,
   TouchableOpacity,
 }from 'react-native';
+
 import styled from 'styled-components';
+
 import { COLORS, FONTS, icons, images, SIZES } from '../constants';
 
-import TodaysShare from '../components/TodaysShare';
 import AddedFriends from '../components/AddedFriends';
+
 
 const Container = styled.View`
   flex: 1;
@@ -52,9 +53,47 @@ const PlantsListWrapper = styled.View`
   margin-right: ${SIZES.base*2}px;
 `;
 
+// Today's Share Item
+const ShareWrapper = styled.View`
+  flex:1;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: ${COLORS.white};
+`;
+const TodaysTitleWrapper = styled.View`
+  flex: 1;
+  margin-top: ${SIZES.font}px;
+  margin-left: ${SIZES.padding}px;
+  margin-right: ${SIZES.padding}px;
+`;
+const TitleItemWrapper = styled.View`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+`;
+const Title = styled.Text`
+  color: ${COLORS.secondary};
+`;
+const SeeAll = styled.Text`
+  color: ${COLORS.secondary};
+`;
+const SharePicWrapper = styled.View`
+  height: 82%;
+  flex-direction: row;
+  margin-top: ${SIZES.base}px;
+`;
+const ShareLeftPicWrapper = styled.View`
+  flex: 1;
+`;
+const ShareRightPicWrapper = styled.View`
+  flex: 1.3;
+`;
+const ImagePicker = styled.TouchableOpacity`
+  flex:1;
+`;
 
 
-const Home = () => {
+const Home = ( {navigation} ) => {
   // Dummy Data
   const [newPlants, setNewPlants] = React.useState([
     {
@@ -115,7 +154,9 @@ const Home = () => {
     )
   }
   
+
   return(
+
     <Container>
       {/* Start of New Plants */}
       <ContainerNewPlants>
@@ -128,7 +169,7 @@ const Home = () => {
               <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
                 New Plants
               </Text>
-              <TouchableOpacity onPress={()=>{}}>              
+              <TouchableOpacity onPress={()=>{ navigation.navigate('PlantDetail') }}>              
                 <Image 
                   source={icons.focus}  
                   resizeMode='contain'
@@ -154,8 +195,74 @@ const Home = () => {
         </ContainerGreen>
       </ContainerNewPlants>
       {/* End of New Plants */}
+      {/* Start of Today's Share */}
+      
+      <ShareWrapper>
+        <TodaysTitleWrapper>
+       
+          <TitleItemWrapper>
+            <Title style={{...FONTS.h2}}>Today's Share</Title>
+            <TouchableOpacity onPress={()=>{navigation.navigate('PlantDetail')}}>
+              <SeeAll style={{...FONTS.body3}}>See All</SeeAll>
+            </TouchableOpacity>
+          </TitleItemWrapper>
+      
 
-      <TodaysShare/>
+          {/* Today's Share pictures */}
+          <SharePicWrapper>
+            {/* left main pic */}
+            <ShareLeftPicWrapper>
+              <ImagePicker 
+                onPress={()=> {navigation.navigate('PlantDetail')}}
+              >
+                <Image 
+                  source={images.plant5}
+                  resizeMode='cover'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: 20,
+                  }}
+                />
+              </ImagePicker>
+              <ImagePicker 
+                style={{marginTop: SIZES.font}} 
+                onPress={ ()=> {navigation.navigate('PlantDetail')} }
+              >
+                <Image 
+                  source={images.plant6}
+                  resizeMode='cover'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: 20,
+                  }}
+                />
+              </ImagePicker>
+            </ShareLeftPicWrapper>
+
+            {/* right main pic */}
+            <ShareRightPicWrapper>
+              <ImagePicker 
+                style={{marginLeft: SIZES.font}} 
+                onPress={ ()=> {navigation.navigate('PlantDetail')} }
+              >
+                <Image 
+                  source={images.plant7}
+                  resizeMode='cover'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: 20,
+                  }}
+                />
+              </ImagePicker>
+            </ShareRightPicWrapper>
+          </SharePicWrapper> 
+        </TodaysTitleWrapper>
+      </ShareWrapper>
+      {/* End of Today's Share */}
+      
 
       <AddedFriends/>
       

@@ -7,8 +7,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../Screens/';
 import { icons, COLORS } from '../constants';
-import { color } from 'react-native-reanimated';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Tab = createBottomTabNavigator();
 

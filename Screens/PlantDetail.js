@@ -21,7 +21,8 @@ const PlantDetail = () => {
   return(
     <Container>
       <Row>
-        
+        <Text>Hit here</Text>
+        <Text>Right</Text>
       </Row>
     </Container>
   )
